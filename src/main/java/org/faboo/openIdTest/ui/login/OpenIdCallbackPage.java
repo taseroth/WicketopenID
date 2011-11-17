@@ -2,6 +2,7 @@ package org.faboo.openIdTest.ui.login;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.faboo.openIdTest.service.LoginService;
+import org.faboo.openIdTest.ui.SampleSession;
 import org.faboo.openIdTest.ui.WicketApplication;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ public class OpenIdCallbackPage extends WebPage {
 
         LoginService loginService = ((WicketApplication) WicketApplication.get()).getLoginService();
 
-        loginService.finishLogin((HttpServletRequest) getRequest().getContainerRequest());
+        SampleSession.get().setUserEmail(
+                loginService.finishLogin((HttpServletRequest) getRequest().getContainerRequest()));
     }
 }

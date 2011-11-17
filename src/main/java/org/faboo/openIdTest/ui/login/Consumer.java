@@ -2,9 +2,7 @@ package org.faboo.openIdTest.ui.login;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.RequestUtils;
-import org.apache.wicket.request.Url;
 import org.apache.wicket.request.cycle.RequestCycle;
-import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.faboo.openIdTest.service.LoginService;
 import org.faboo.openIdTest.ui.WicketApplication;
@@ -39,18 +37,11 @@ public class Consumer extends WebPage {
 
         String requestURL = req.getRequestURL().toString();
 
-        // wicket 1.5 can 't cope with requestURLs that contain more
+        // wicket 1.5 can 't cope with requestURLs that contain more than one /
 
         String callbackURL = RequestUtils.toAbsolutePath(requestURL, relativePagePath);
 
-        logger.trace("relativePagePath: {}, callbackURL: {}", relativePagePath, callbackURL);
-
-        logger.trace("***: {}", req.getRequestURL().toString());
-
-        logger.trace("###: {}", RequestCycle.get().mapUrlFor(OpenIdCallbackPage.class, null).toAbsoluteString());
-        logger.trace("+++: {}", RequestUtils.toAbsolutePath(
-                req.getRequestURL().toString()
-                , RequestCycle.get().mapUrlFor(OpenIdCallbackPage.class, null).toAbsoluteString()));
-        loginService.startLogin(openIDIdentifier, callbackURL);
+        loginService.startLogin(openIDIdentifier, callbackURL
+                , (HttpServletRequest) getRequest().getContainerRequest());
     }
 }

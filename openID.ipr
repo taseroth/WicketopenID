@@ -16,10 +16,10 @@
             <element id="module-output" name="openID" />
           </element>
           <element id="directory" name="lib">
-            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-core:1.5.2" />
-            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-util:1.5.2" />
+            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-core:1.5.3" />
+            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-util:1.5.3" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.1" />
-            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-request:1.5.2" />
+            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-request:1.5.3" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" />
             <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
             <element id="library" level="project" name="Maven: org.openid4java:openid4java-nodeps:0.9.6" />
@@ -314,37 +314,37 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.wicket:wicket-core:1.5.2">
+    <library name="Maven: org.apache.wicket:wicket-core:1.5.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.2/wicket-core-1.5.2.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.3/wicket-core-1.5.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.2/wicket-core-1.5.2-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.3/wicket-core-1.5.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.2/wicket-core-1.5.2-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/1.5.3/wicket-core-1.5.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.wicket:wicket-request:1.5.2">
+    <library name="Maven: org.apache.wicket:wicket-request:1.5.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.2/wicket-request-1.5.2.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.3/wicket-request-1.5.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.2/wicket-request-1.5.2-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.3/wicket-request-1.5.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.2/wicket-request-1.5.2-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-request/1.5.3/wicket-request-1.5.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.wicket:wicket-util:1.5.2">
+    <library name="Maven: org.apache.wicket:wicket-util:1.5.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.2/wicket-util-1.5.2.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.3/wicket-util-1.5.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.2/wicket-util-1.5.2-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.3/wicket-util-1.5.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.2/wicket-util-1.5.2-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/1.5.3/wicket-util-1.5.3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.eclipse.jetty.aggregate:jetty-all-server:7.3.0.v20110203">

@@ -2,7 +2,10 @@ package org.faboo.openIdTest.service;
 
 import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.openid4java.OpenIDException;
+import org.openid4java.association.AssociationSessionType;
 import org.openid4java.consumer.ConsumerManager;
+import org.openid4java.consumer.InMemoryConsumerAssociationStore;
+import org.openid4java.consumer.InMemoryNonceVerifier;
 import org.openid4java.consumer.VerificationResult;
 import org.openid4java.discovery.DiscoveryInformation;
 import org.openid4java.discovery.Identifier;
@@ -29,19 +32,21 @@ public class LoginService {
 
     private ConsumerManager consumerManager;
 
-    private DiscoveryInformation dirtyDiscovery;
-
     public LoginService() {
-        this.consumerManager = new ConsumerManager();
+        consumerManager = new ConsumerManager();
+        consumerManager.setAssociations(new InMemoryConsumerAssociationStore());
+        consumerManager.setNonceVerifier(new InMemoryNonceVerifier(5000)); // in seconds
+        consumerManager.setMinAssocSessEnc(AssociationSessionType.DH_SHA256);
     }
 
     /**
      * Establishes a relation with the OpenID provider and constructs the auth requests.
      * @param openIDProvider URL of the OpenID provider.
      * @param callbackURL URL the provider calls us under to finish the auth process.
+     * @param request the http request. needed to store discovery information
      */
     @SuppressWarnings("unchecked")
-    public void startLogin(String openIDProvider, String callbackURL) {
+    public void startLogin(String openIDProvider, String callbackURL, HttpServletRequest request) {
 
         logger.trace("startLogin() openIDProvider:{}, callbackURL:{} ", openIDProvider ,callbackURL);
 
@@ -54,14 +59,12 @@ public class LoginService {
 
             DiscoveryInformation discovered = consumerManager.associate(discoveries);
             logger.trace("discovered: {}" ,discovered.toString());
-            dirtyDiscovery = discovered;
 
             AuthRequest authReq = consumerManager.authenticate(discovered, callbackURL);
             FetchRequest fetch = FetchRequest.createFetchRequest();
-            fetch.addAttribute("email",
-                    // attribute alias
-                    "http://schema.openid.net/contact/email",   // type URI
-                    true);                                      // required
+            fetch.addAttribute("email","http://schema.openid.net/contact/email", true);
+
+            request.getSession().setAttribute(DiscoveryInformation.class.getName(), discovered);
 
             // attach the extension to the authentication request
             authReq.addExtension(fetch);
@@ -80,7 +83,7 @@ public class LoginService {
      * The email of the user gets retrieved and returned.
      * @param request the request containing the parameters from the callback.
      * @return the email of the user
-     * TODO: hanlde login errors in some way (exception?)
+     * TODO: handle login errors in some way (exception?)
      */
     public String finishLogin(HttpServletRequest request)  {
 
@@ -97,26 +100,29 @@ public class LoginService {
             if (queryString != null && queryString.length() > 0)
                     receivingURL.append("?").append(request.getQueryString());
 
+            DiscoveryInformation discoveryInformation = (DiscoveryInformation)
+                    request.getSession().getAttribute(DiscoveryInformation.class.getName());
+
+            // remove from session
+            request.getSession().removeAttribute(DiscoveryInformation.class.getName());
+
             // verify the response; ConsumerManager needs to be the same
             // (static) instance used to place the authentication request
-            VerificationResult verification = consumerManager.verify(
-                    receivingURL.toString(),
-                    response, dirtyDiscovery);
+            VerificationResult verification = consumerManager.verify(receivingURL.toString()
+                    ,response, discoveryInformation);
 
             // examine the verification result and extract the verified identifier
             Identifier verified = verification.getVerifiedId();
             if (verified != null) {
-                AuthSuccess authSuccess =
-                        (AuthSuccess) verification.getAuthResponse();
+                AuthSuccess authSuccess =(AuthSuccess) verification.getAuthResponse();
 
                 if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX)) {
 
-                    FetchResponse fetchResp = (FetchResponse) authSuccess
-                            .getExtension(AxMessage.OPENID_NS_AX);
+                    FetchResponse fetchResp = (FetchResponse) authSuccess.getExtension(AxMessage.OPENID_NS_AX);
 
-                    List emails = fetchResp.getAttributeValues("email");
-                    String email = (String) emails.get(0);
+                    String email = fetchResp.getAttributeValue("email");
                     logger.debug("email: {}" ,email);
+                    return email;
                 }
 
 
