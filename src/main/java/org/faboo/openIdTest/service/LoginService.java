@@ -84,8 +84,9 @@ public class LoginService {
      * @param request the request containing the parameters from the callback.
      * @return the email of the user
      * TODO: handle login errors in some way (exception?)
+     * @throws LoginFailedException something wrent wrong ...
      */
-    public String finishLogin(HttpServletRequest request)  {
+    public String finishLogin(HttpServletRequest request) throws LoginFailedException {
 
         try {
 

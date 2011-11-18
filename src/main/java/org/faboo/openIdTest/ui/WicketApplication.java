@@ -28,10 +28,13 @@ public class WicketApplication extends WebApplication {
 	public void init() {
 		super.init();
 
+        getSecuritySettings().setAuthorizationStrategy(new AuthStrategy());
+
 		// add your configuration here
         mountPage("loginCallback", OpenIdCallbackPage.class);
         mountPage("loginDo", LoginPage.class);
         mountPage("loginConsumer", Consumer.class);
+        mountPage("SamplePage", MountedSecuredPage.class);
 
         loginService = new LoginService();
 
