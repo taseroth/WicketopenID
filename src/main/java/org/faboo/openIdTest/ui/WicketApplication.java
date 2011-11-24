@@ -5,9 +5,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.faboo.openIdTest.service.LoginService;
-import org.faboo.openIdTest.ui.login.Consumer;
 import org.faboo.openIdTest.ui.login.LoginPage;
-import org.faboo.openIdTest.ui.login.OpenIdCallbackPage;
 
 public class WicketApplication extends WebApplication {
 
@@ -31,10 +29,8 @@ public class WicketApplication extends WebApplication {
         getSecuritySettings().setAuthorizationStrategy(new AuthStrategy());
 
 		// add your configuration here
-        mountPage("loginCallback", OpenIdCallbackPage.class);
         mountPage("loginDo", LoginPage.class);
-        mountPage("loginConsumer", Consumer.class);
-        mountPage("SamplePage", MountedSecuredPage.class);
+        mountPage("SampleSecuredPage", MountedSecuredPage.class);
 
         loginService = new LoginService();
 

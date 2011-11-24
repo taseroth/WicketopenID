@@ -6,7 +6,6 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.request.component.IRequestableComponent;
-import org.faboo.openIdTest.ui.login.Consumer;
 import org.faboo.openIdTest.ui.login.LoginPage;
 import org.faboo.openIdTest.ui.login.OpenIdCallbackPage;
 
@@ -23,10 +22,6 @@ public class AuthStrategy implements IAuthorizationStrategy {
 		if (LoginPage.class.isAssignableFrom(componentClass)) {
 			return true;
 		}
-
-        if (Consumer.class.isAssignableFrom(componentClass)) {
-            return true;
-        }
 
 		if (OpenIdCallbackPage.class.isAssignableFrom(componentClass)) {
 			return true;

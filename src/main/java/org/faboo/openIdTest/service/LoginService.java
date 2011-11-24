@@ -83,7 +83,7 @@ public class LoginService {
      * The email of the user gets retrieved and returned.
      * @param request the request containing the parameters from the callback.
      * @return the email of the user
-     * TODO: handle login errors in some way (exception?)
+     *
      * @throws LoginFailedException something wrent wrong ...
      */
     public String finishLogin(HttpServletRequest request) throws LoginFailedException {
@@ -126,11 +126,10 @@ public class LoginService {
                     return email;
                 }
 
-
             }
 
         } catch (OpenIDException e) {
-            logger.error("error processing the callback", e);
+            throw new LoginFailedException(e);
         }
 
         return null;

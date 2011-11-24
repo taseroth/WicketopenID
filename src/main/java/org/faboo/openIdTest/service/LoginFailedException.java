@@ -1,8 +1,14 @@
 package org.faboo.openIdTest.service;
 
 /**
- * User: br
  */
 public class LoginFailedException extends Exception {
 
+    public LoginFailedException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public LoginFailedException(Throwable cause) {
+        super(cause);
+    }
 }
